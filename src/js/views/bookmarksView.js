@@ -3,6 +3,7 @@ import previewView from './previewView.js';
 import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class BookmarksView extends View {
+  // this._data = model.state.bookmarks = array of recipe objects
   _parentElement = document.querySelector('.bookmarks__list');
   _errorMessage = 'No bookmarks yet.  Find a nice recipe and bookmark it  😊';
   _message = '';
@@ -14,7 +15,6 @@ class BookmarksView extends View {
   }
 
   _generateMarkup() {
-    console.log('generateMarkup:', this._data);
     return this._data
       .map(bookmark => previewView.render(bookmark, false))
       .join('');

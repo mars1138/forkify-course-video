@@ -16,13 +16,14 @@ export default class View {
    * @todo Finish implementation
    */
   render(data, render = true) {
+    // API will return empty array if no query match
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
     this._data = data;
     const markup = this._generateMarkup();
 
-    // If we are rendering search results or bookmarks, we want to immediately return the string
+    // If rendering search results or bookmarks via previewView->render(), immediately return the html string
     if (!render) return markup;
 
     this._clear();

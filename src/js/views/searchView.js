@@ -1,8 +1,8 @@
 class SearchView {
-  _parentElement = document.querySelector('.search');
-  //
+  _parentElement = document.querySelector('.search'); // form element in header
+
   getQuery() {
-    const query = this._parentElement.querySelector('.search__field').value;
+    const query = this._parentElement.querySelector('.search__field').value; // form input element
     this._clearInput();
     return query;
   }

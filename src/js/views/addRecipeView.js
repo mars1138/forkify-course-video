@@ -2,7 +2,7 @@ import View from './View.js'; // parent class
 import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class AddRecipeView extends View {
-  _parentElement = document.querySelector('.upload');
+  _parentElement = document.querySelector('.upload'); // add-recipe form
   _message = 'Recipe was successfully uploaded';
 
   _window = document.querySelector('.add-recipe-window');
@@ -37,7 +37,7 @@ class AddRecipeView extends View {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // create array with all the values of the form
+      // create array of key/value pairs from the form; this = form
       const dataArr = [...new FormData(this)];
       // create object from an array
       const data = Object.fromEntries(dataArr);

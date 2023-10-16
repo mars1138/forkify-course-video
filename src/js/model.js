@@ -1,8 +1,11 @@
-import { async } from 'regenerator-runtime';
+// import { async } from 'regenerator-runtime';
 import { API_URL, RES_PER_PAGE, KEY } from './config.js';
 // import { getJSON, sendJSON } from './helpers';
 import { AJAX } from './helpers.js';
 
+/**
+ * recipe:  current recipe loaded
+ */
 export const state = {
   recipe: {},
   search: {
@@ -118,15 +121,6 @@ export const deleteBookmark = function (id) {
   persistBookmarks();
 };
 
-const init = function () {
-  const storage = localStorage.getItem('bookmarks');
-
-  if (storage) state.bookmarks = JSON.parse(storage);
-
-  console.log(state.bookmarks);
-};
-init();
-
 //
 // for development purposes only
 const clearBookmarks = function () {
@@ -135,8 +129,6 @@ const clearBookmarks = function () {
 // clearBookmarks();
 
 export const uploadRecipe = async function (newRecipe) {
-  console.log(Object.entries(newRecipe));
-
   try {
     const ingredients = Object.entries(newRecipe)
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
@@ -174,3 +166,10 @@ export const uploadRecipe = async function (newRecipe) {
     throw err;
   }
 };
+
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+init();

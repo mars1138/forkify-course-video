@@ -2,6 +2,7 @@ import View from './View.js'; // parent class
 import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class PreviewView extends View {
+  // this._data = recipe object
   _parentElement = '';
 
   _generateMarkup() {

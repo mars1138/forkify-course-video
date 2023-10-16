@@ -8,6 +8,7 @@ import icons from 'url:../../img/icons.svg'; // Parcel 2
 import { Fraction } from 'fractional';
 
 class RecipeView extends View {
+  // this._data = model.state.recipe
   _parentElement = document.querySelector('.recipe');
   _errorMessage = 'We could not find that recipe.  Please try another one!';
   _message = '';
@@ -18,7 +19,7 @@ class RecipeView extends View {
   }
 
   addHandlerUpdateServings(handler) {
-    this._parentElement.addEventListener('click', function (e) {
+    const updateServings = e => {
       const btn = e.target.closest('.btn--update-servings');
 
       if (!btn) return; // prevents handler from running when clicking on empty space around buttons
@@ -26,7 +27,9 @@ class RecipeView extends View {
       const { updateTo } = btn.dataset; // use destructuring for cleaner code
       console.log('updateTo(num):', +updateTo);
       if (+updateTo > 0) handler(+updateTo); // servings must be > 0
-    });
+    };
+
+    this._parentElement.addEventListener('click', updateServings);
   }
 
   addHandlerAddBookmark(handler) {

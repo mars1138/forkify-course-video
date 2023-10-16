@@ -2,6 +2,7 @@ import View from './View.js'; // parent class
 import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class PaginationView extends View {
+  // this._data = model.state.search
   _parentElement = document.querySelector('.pagination');
 
   addHandlerClick(handler) {
@@ -10,10 +11,7 @@ class PaginationView extends View {
 
       if (!btn) return; // otherwise, clicking on empty space next to button causes error
 
-      console.log('btn:', btn);
-
       const goToPage = +btn.dataset.goto; // + to convert string to number
-      console.log(goToPage);
 
       handler(goToPage);
     });
@@ -24,7 +22,6 @@ class PaginationView extends View {
     const numPages = Math.ceil(
       this._data.results.length / this._data.resultsPerPage
     );
-    console.log('numPages:', numPages);
 
     // Page 1, and there are other pages
     if (curPage === 1 && numPages > 1) {
