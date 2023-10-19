@@ -38,16 +38,11 @@ export const loadRecipe = async function (id) {
     // returns a data object that contains a data object that contains a recipe object
     const data = await AJAX(`${API_URL}${id}?key=${KEY}`);
 
-    // console.log('res:', res);
-    console.log('getJSON data:', data);
-
     state.recipe = createRecipeObject(data);
 
     if (state.bookmarks.some(bookmark => bookmark.id === id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
-
-    console.log('state.recipe:', state.recipe);
   } catch (err) {
     console.error(`${err} 💥💥`);
     throw err;
@@ -61,7 +56,6 @@ export const loadSearchResults = async function (query) {
     // returns a data object that contains a data object that contains a recipe array of partial recipe objects
     // adding a key to the URL parameter for AJAX() results in search results with matching key being displayed at top
     const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
-    console.log('loadSearchResults data:', data);
 
     state.search.results = data.data.recipes.map(rec => {
       return {
@@ -73,7 +67,6 @@ export const loadSearchResults = async function (query) {
       };
     });
     state.search.page = 1;
-    console.log('state.search.results:', state.search.results);
   } catch (err) {
     console.error(`${err} 💥💥`);
     throw err;
@@ -144,8 +137,6 @@ export const uploadRecipe = async function (newRecipe) {
         return { quantity: quantity ? +quantity : null, unit, description };
       });
 
-    console.log(ingredients);
-
     // create new object that matches the format of data retrieved from API
     const recipe = {
       title: newRecipe.title,
@@ -156,10 +147,8 @@ export const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients,
     };
-    console.log('API recipe:', recipe);
 
     const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
-    console.log(data);
     state.recipe = createRecipeObject(data);
     addBookmark(state.recipe);
   } catch (err) {

@@ -1,4 +1,4 @@
- import { TIMEOUT_SEC } from './config.js';
+import { TIMEOUT_SEC } from './config.js';
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -23,10 +23,7 @@ export const AJAX = async function (url, uploadData = undefined) {
     // if timeout finishes 1st, will result in rejected promise and trigger catch block below;
     // Forkify API will return back the data we send to it
     const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
-    console.log('getJSON res:', res);
-
     const data = await res.json();
-    console.log('getJSON data:', data);
 
     if (!res.ok) throw new Error(`${data.message} (${res.status}😫)`);
 

@@ -22,7 +22,6 @@ import 'core-js/stable'; // polyfilling everything else
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    // console.log(id.slice(1));
 
     if (!id) return;
     recipeView.renderSpinner();
@@ -40,7 +39,6 @@ const controlRecipes = async function () {
     // 3) Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    // console.log('controlRecipes:', err);
     recipeView.renderError(err);
     console.error(err);
   }
@@ -60,11 +58,6 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render results
-    // console.log(
-    //   'controlSearchResults state.search.results:',
-    //   model.state.search.results
-    // );
-    // resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
 
     // 4) Render initial pagination buttons
@@ -75,7 +68,6 @@ const controlSearchResults = async function () {
 };
 
 const controlPagination = function (goToPage) {
-  console.log('goToPage:', goToPage);
   // 1) Render new results
   resultsView.render(model.getSearchResultsPage(goToPage));
 
@@ -98,7 +90,6 @@ const controlAddBookmark = function () {
   else model.deleteBookmark(model.state.recipe.id);
 
   // 2) Update recipe view
-  console.log('controlAddBookmark:', model.state.recipe);
   recipeView.update(model.state.recipe);
 
   // 3) Render bookmarks

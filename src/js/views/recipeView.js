@@ -4,8 +4,7 @@ import View from './View.js'; // parent class
 // need to tell
 // import icons from '../imgs/icons.svg';  // Parcel 1
 import icons from 'url:../../img/icons.svg'; // Parcel 2
-// console.log(icons); // should show: dist/icons.xxxxxx.svg
-import { Fraction } from 'fractional';
+import fracty from 'fracty';
 
 class RecipeView extends View {
   // this._data = model.state.recipe
@@ -23,9 +22,7 @@ class RecipeView extends View {
       const btn = e.target.closest('.btn--update-servings');
 
       if (!btn) return; // prevents handler from running when clicking on empty space around buttons
-      console.log('btn:', btn);
       const { updateTo } = btn.dataset; // use destructuring for cleaner code
-      console.log('updateTo(num):', +updateTo);
       if (+updateTo > 0) handler(+updateTo); // servings must be > 0
     };
 
@@ -142,7 +139,7 @@ class RecipeView extends View {
             <use href="${icons}#icon-check"></use>
           </svg>
           <div class="recipe__quantity">${
-            ing.quantity ? new Fraction(ing.quantity).toString() : ''
+            ing.quantity ? fracty(ing.quantity).toString() : ''
           }</div>
           <div class="recipe__description">
             <span class="recipe__unit">${ing.unit}</span>

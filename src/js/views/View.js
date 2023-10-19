@@ -41,11 +41,8 @@ export default class View {
     // create arrays of elements from node lists returned by query selector
     const newElements = Array.from(newDOM.querySelectorAll('*'));
     const curElements = Array.from(this._parentElement.querySelectorAll('*'));
-    // console.log(curElements);
-    // console.log(newElements);
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
-      // console.log(curEl, newEl.isEqualNode(curEl));
 
       // Updates have changed TEXT:
       // check that nodes are equal AND that first child is text (since we only want to change text value);
@@ -54,14 +51,11 @@ export default class View {
         !newEl.isEqualNode(curEl) &&
         newEl.firstChild?.nodeValue.trim() !== ''
       ) {
-        // console.log('💥💥💥', newEl.firstChild.nodeValue.trim());
         curEl.textContent = newEl.textContent;
       }
 
       // Updates have changed ATTRIBUTES:
       if (!newEl.isEqualNode(curEl)) {
-        // console.log(newEl.attributes);
-        // console.log(Array.from(newEl.attributes));
         Array.from(newEl.attributes).forEach(attr =>
           curEl.setAttribute(attr.name, attr.value)
         );
